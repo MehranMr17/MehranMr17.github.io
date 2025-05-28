@@ -39,7 +39,7 @@
         }
 
         body {
-            font-family: 'Vazirmatn', 'Roboto', sans-serif;
+            font-family: 'Vazirmatn', 'Roboto', sans-serif; /* Vazirmatn for FA/CKB, Roboto for EN */
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.8;
@@ -49,6 +49,10 @@
         body.lang-en {
             font-family: 'Roboto', 'Vazirmatn', sans-serif;
         }
+        body.lang-ckb { /* Explicitly define for Sorani if needed, though Vazirmatn should take precedence from base */
+            font-family: 'Vazirmatn', 'Roboto', sans-serif; 
+        }
+
 
         .container {
             max-width: 1100px;
@@ -72,12 +76,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens if title + buttons get too wide */
         }
 
         header .title-lang-switch {
             display: flex;
             align-items: center;
-            flex-shrink: 0; /* Prevent shrinking of title and lang switch */
+            flex-shrink: 0; 
         }
 
         header h1.site-title {
@@ -86,10 +91,10 @@
             color: var(--text-color); 
         }
         html[dir="rtl"] header h1.site-title {
-            margin-left: 20px; 
+            margin-left: 15px; 
         }
         html[dir="ltr"] header h1.site-title {
-            margin-right: 20px; 
+            margin-right: 15px; 
         }
 
 
@@ -97,11 +102,12 @@
             background: none;
             border: 1px solid var(--accent-1); 
             color: var(--accent-1);
-            padding: 5px 10px;
-            margin: 0 5px;
+            padding: 5px 8px; 
+            margin: 0 3px; 
             cursor: pointer;
             border-radius: 4px;
             transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-size: 0.85rem; 
         }
         .lang-switch button:hover, .lang-switch button.active {
             background-color: var(--accent-1);
@@ -109,22 +115,35 @@
         }
 
         nav {
-            overflow-x: auto; /* Allow horizontal scrolling for nav on small screens if needed */
+            overflow-x: auto; 
             overflow-y: hidden;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            -webkit-overflow-scrolling: touch; 
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: var(--accent-1) var(--header-background); /* For Firefox */
         }
+        nav::-webkit-scrollbar { /* For Chrome, Safari, Edge */
+            height: 6px;
+        }
+        nav::-webkit-scrollbar-thumb {
+            background-color: var(--accent-1);
+            border-radius: 3px;
+        }
+        nav::-webkit-scrollbar-track {
+            background-color: var(--header-background);
+        }
+
 
         nav ul {
             list-style: none;
             display: flex;
-            white-space: nowrap; /* Keep nav items on one line */
+            white-space: nowrap; 
         }
 
         html[dir="rtl"] nav ul li {
-            margin-right: 18px; 
+            margin-right: 16px; /* Slightly reduced for potentially more items */
         }
         html[dir="ltr"] nav ul li {
-            margin-left: 18px; 
+            margin-left: 16px; 
         }
 
         html[dir="rtl"] nav ul li:last-child {
@@ -134,12 +153,11 @@
             margin-left: 0;
         }
         
-        /* This rule adds space AFTER "Honors" (before "Contact") */
-        html[dir="rtl"] nav ul li:has(a[href="#honors"]) {
-            margin-left: 15px; 
+        html[dir="rtl"] nav ul li:has(a[href="#honors"]) { /* Space between Honors and Contact */
+            margin-left: 12px; /* Adjusted */
         }
         html[dir="ltr"] nav ul li:has(a[href="#honors"]) {
-            margin-right: 15px; 
+            margin-right: 12px; /* Adjusted */
         }
 
 
@@ -148,7 +166,7 @@
             text-decoration: none;
             font-weight: 400;
             transition: color var(--transition-speed);
-            font-size: 0.95rem;
+            font-size: 0.9rem; /* Slightly reduced nav link font size */
         }
 
         nav ul li a:hover, nav ul li a.active {
@@ -640,6 +658,14 @@
         }
 
         /* Responsive Adjustments */
+        @media (max-width: 992px) { /* Adjusted breakpoint for nav items */
+             nav {
+                order: 1; /* Ensure nav is below title/lang switch if header wraps */
+                width: 100%; 
+                margin-top: 10px; /* Add some space if header wraps */
+            }
+        }
+
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
@@ -652,15 +678,14 @@
             }
             nav {
                 width: 100%;
-                /* overflow-x: auto; -- Kept from previous */
+                margin-top: 5px; /* Reset margin-top for smaller screens */
             }
             nav ul {
-                /* justify-content: flex-start; -- Kept from previous */
-                padding: 0 5px; /* Slightly reduce padding if items are many */
+                padding: 0 5px; 
             }
             html[dir="rtl"] nav ul li, html[dir="ltr"] nav ul li { 
-                margin: 0 8px !important; /* Reduced margin for mobile nav items */
-                font-size: 0.9rem; /* Slightly smaller font for mobile nav */
+                margin: 0 8px !important; 
+                font-size: 0.9rem; 
             }
              html[dir="rtl"] nav ul li:has(a[href="#honors"]),
              html[dir="ltr"] nav ul li:has(a[href="#honors"]) { 
@@ -742,22 +767,23 @@
     <header>
         <div class="container">
             <div class="title-lang-switch">
-                <h1 class="site-title" data-fa="مهران رسول زاده" data-en="Mehran Rasoulzadeh">مهران رسول زاده</h1>
+                <h1 class="site-title" data-fa="مهران رسول زاده" data-en="Mehran Rasoulzadeh" data-ckb="مێهران ڕەسولزادە">مهران رسول زاده</h1>
                 <div class="lang-switch">
                     <button data-lang="fa" class="active">FA</button>
                     <button data-lang="en">EN</button>
+                    <button data-lang="ckb">کوردی</button>
                 </div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#hero" class="active nav-link" data-fa="مقدمه" data-en="Home">مقدمه</a></li>
-                    <li><a href="#about" class="nav-link" data-fa="درباره‌ من" data-en="About">درباره‌ من</a></li>
-                    <li><a href="#skills" class="nav-link" data-fa="توانمندی‌ها" data-en="Skills">توانمندی‌ها</a></li>
-                    <li><a href="#projects" class="nav-link" data-fa="پروژه‌های منتخب" data-en="Projects">پروژه‌های منتخب</a></li>
-                    <li><a href="#experience" class="nav-link" data-fa="سوابق حرفه‌ای" data-en="Experience">سوابق حرفه‌ای</a></li>
-                    <li><a href="#education" class="nav-link" data-fa="سوابق تحصیلی" data-en="Education">سوابق تحصیلی</a></li>
-                    <li><a href="#honors" class="nav-link" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors">افتخارات و گواهینامه‌ها</a></li>
-                    <li><a href="#contact" class="nav-link" data-fa="ارتباط با من" data-en="Contact">ارتباط با من</a></li>
+                    <li><a href="#hero" class="active nav-link" data-fa="مقدمه" data-en="Home" data-ckb="سەرەتا">مقدمه</a></li>
+                    <li><a href="#about" class="nav-link" data-fa="درباره‌ من" data-en="About" data-ckb="ده‌رباره‌ی من">درباره‌ من</a></li>
+                    <li><a href="#skills" class="nav-link" data-fa="توانمندی‌ها" data-en="Skills" data-ckb="تواناکان">توانمندی‌ها</a></li>
+                    <li><a href="#projects" class="nav-link" data-fa="پروژه‌های منتخب" data-en="Projects" data-ckb="پڕۆژەکان">پروژه‌های منتخب</a></li>
+                    <li><a href="#experience" class="nav-link" data-fa="سوابق حرفه‌ای" data-en="Experience" data-ckb="ئەزموونی کار">سوابق حرفه‌ای</a></li>
+                    <li><a href="#education" class="nav-link" data-fa="سوابق تحصیلی" data-en="Education" data-ckb="خوێندن">سوابق تحصیلی</a></li>
+                    <li><a href="#honors" class="nav-link" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors" data-ckb="ڕێزلێنانەکان">افتخارات و گواهینامه‌ها</a></li>
+                    <li><a href="#contact" class="nav-link" data-fa="ارتباط با من" data-en="Contact" data-ckb="پەیوەندی">ارتباط با من</a></li>
                 </ul>
             </nav>
         </div>
@@ -766,12 +792,12 @@
     <main>
         <section id="hero">
             <div class="container hero-content">
-                <h1 class="hero-name" data-fa="مهران رسول زاده" data-en="Mehran Rasoulzadeh">مهران رسول زاده</h1>
-                <p class="subtitle" data-fa="توسعه‌دهنده متخصص اپلیکیشن‌های اندروید" data-en="Specialized Android Application Developer">توسعه‌دهنده متخصص اپلیکیشن‌های اندروید</p>
+                <h1 class="hero-name" data-fa="مهران رسول زاده" data-en="Mehran Rasoulzadeh" data-ckb="مێهران ڕەسولزادە">مهران رسول زاده</h1>
+                <p class="subtitle" data-fa="توسعه‌دهنده متخصص اپلیکیشن‌های اندروید" data-en="Specialized Android Application Developer" data-ckb="گەشەپێدەری پسپۆڕی بەرنامەکانی ئەندرۆید">توسعه‌دهنده متخصص اپلیکیشن‌های اندروید</p>
                 <div class="contact-info">
-                    <span><i class="fas fa-phone"></i> ۰۹۸۹۰۳۵۸۷۲۳۹۹</span>
+                    <span><i class="fas fa-phone"></i> +۹۸۹۰۳۵۸۷۲۳۹۹</span>
                     <a href="mailto:mrsYmehranni@gmail.com"><i class="fas fa-envelope"></i> mrsYmehranni@gmail.com</a>
-                    <span data-fa="ایران، آذربایجان غربی، ارومیه" data-en="Urmia, West Azerbaijan, Iran"><i class="fas fa-map-marker-alt"></i> ایران، آذربایجان غربی، ارومیه</span>
+                    <span data-fa="ایران، آذربایجان غربی، ارومیه" data-en="Urmia, West Azerbaijan, Iran" data-ckb="ئێران، ئازەربایجانی ڕۆژاوا، ورمێ"><i class="fas fa-map-marker-alt"></i> ایران، آذربایجان غربی، ارومیه</span>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/MehranMrIV" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -783,26 +809,29 @@
         </section>
 
         <section id="about" class="container">
-            <h2 class="section-title" data-fa="درباره‌ من" data-en="About Me">درباره‌ من</h2>
+            <h2 class="section-title" data-fa="درباره‌ من" data-en="About Me" data-ckb="ده‌رباره‌ی من">درباره‌ من</h2>
             <div class="about-content">
                 <div class="summary card">
-                    <h3 class="content-title" data-fa="نگاهی اجمالی" data-en="Overview">نگاهی اجمالی</h3>
-                    <p data-fa="من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم." data-en="I am an Android developer who deeply believes in the power of technology to solve complex challenges and create innovative user experiences. For me, programming is more than just a job; it's an art and a tool for transforming creative ideas into functional and impactful software products. I am always eager to learn new technologies and apply them to challenging projects, and I welcome collaboration with dynamic, goal-oriented teams to achieve common objectives and enhance my technical skills.">من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم.</p>
+                    <h3 class="content-title" data-fa="نگاهی اجمالی" data-en="Overview" data-ckb="کورتەیەک">نگاهی اجمالی</h3>
+                    <p data-fa="من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم." data-en="I am an Android developer who deeply believes in the power of technology to solve complex challenges and create innovative user experiences. For me, programming is more than just a job; it's an art and a tool for transforming creative ideas into functional and impactful software products. I am always eager to learn new technologies and apply them to challenging projects, and I welcome collaboration with dynamic, goal-oriented teams to achieve common objectives and enhance my technical skills." data-ckb="من گەشەپێدەرێکی ئەندرۆیدم کە باوەڕێکی قووڵم بە هێزی تەکنەلۆژیا هەیە بۆ چارەسەرکردنی کێشە ئاڵۆزەکان و داهێنانی ئەزموونی بەکارهێنەری نوێ. پڕۆگرامسازی بۆ من زیاترە لە پیشەیەک، بەڵکو هونەرێکە و ئامرازێکە بۆ گۆڕینی بیرۆکە داهێنەرەکان بۆ بەرهەمی نەرمامێری کارا و کاریگەر. هەمیشە تامەزرۆی فێربوونی تەکنەلۆژیای نوێ و بەکارهێنانیانم لە پڕۆژە چالاکەکاندا، و پێشوازی لە هاوکاری لەگەڵ تیمە چالاک و ئامانجداره‌کان دەکەم بۆ گەیشتن بە ئامانجە هاوبەشەکان و بەرزکردنەوەی ئاستی تواناکانی تەکنیکی خۆم.">من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم.</p>
                 </div>
                 <div class="personal-details-lang card">
-                    <h3 class="content-title" data-fa="اطلاعات فردی" data-en="Personal Details">اطلاعات فردی</h3>
+                    <h3 class="content-title" data-fa="اطلاعات فردی" data-en="Personal Details" data-ckb="زانیاریی کەسی">اطلاعات فردی</h3>
                     <ul>
-                        <li><strong data-fa="تاریخ تولد:" data-en="Date of Birth:">تاریخ تولد:</strong> <span data-fa="۱۳۸۴/۱۱/۲۴" data-en="February 13, 2006">۱۳۸۴/۱۱/۲۴</span></li>
-                        <li><strong data-fa="وضعیت تأهل:" data-en="Marital Status:">وضعیت تأهل:</strong> <span data-fa="مجرد" data-en="Single">مجرد</span></li>
-                        <li><strong data-fa="وضعیت نظام‌وظیفه:" data-en="Military Service:">وضعیت نظام‌وظیفه:</strong> <span data-fa="معافیت تحصیلی" data-en="Educational Exemption">معافیت تحصیلی</span></li>
+                        <li><strong data-fa="تاریخ تولد:" data-en="Date of Birth:" data-ckb="ڕێکەوتی لەدایکبوون:">تاریخ تولد:</strong> <span data-fa="۱۳۸۴/۱۱/۲۴" data-en="February 13, 2006" data-ckb="٢٤ی ڕێبەندانی ١٣٨٤ی ھەتاوی">۱۳۸۴/۱۱/۲۴</span></li>
+                        <li><strong data-fa="وضعیت تأهل:" data-en="Marital Status:" data-ckb="باری خێزانی:">وضعیت تأهل:</strong> <span data-fa="مجرد" data-en="Single" data-ckb="سەڵت">مجرد</span></li>
+                        <li><strong data-fa="وضعیت نظام‌وظیفه:" data-en="Military Service:" data-ckb="باری سەربازی:">وضعیت نظام‌وظیفه:</strong> <span data-fa="معافیت تحصیلی" data-en="Educational Exemption" data-ckb="لێخۆشبوونی خوێندن">معافیت تحصیلی</span></li>
                     </ul>
                     <div class="languages">
-                        <h3 class="content-title" data-fa="مهارت‌های زبانی" data-en="Language Skills">مهارت‌های زبانی</h3>
+                        <h3 class="content-title" data-fa="مهارت‌های زبانی" data-en="Language Skills" data-ckb="توانایییەکانی زمان">مهارت‌های زبانی</h3>
                         <div class="language-item">
-                            <span data-fa="فارسی (زبان مادری):" data-en="Persian (Native):">فارسی (زبان مادری):</span> <span class="stars">★★★★★</span>
+                            <span data-fa="فارسی (پیشرفته):" data-en="Persian (Advanced):" data-ckb="فارسی (پێشکەوتوو):">فارسی (زبان مادری):</span> <span class="stars">★★★★★</span>
                         </div>
                         <div class="language-item">
-                            <span data-fa="انگلیسی (پیشرفته):" data-en="English (Advanced):">انگلیسی (پیشرفته):</span> <span class="stars">★★★★★</span>
+                            <span data-fa="انگلیسی (پیشرفته):" data-en="English (Advanced):" data-ckb="ئینگلیزی (پێشکەوتوو):">انگلیسی (پیشرفته):</span> <span class="stars">★★★★★</span>
+                        </div>
+                         <div class="language-item">
+                            <span data-fa="کوردی سورانی (زبان مادری):" data-en="Sorani Kurdish (Native):" data-ckb="کوردیی ناوەندی (زمانی دایکی):">کوردی سورانی (روان):</span> <span class="stars">★★★★★</span>
                         </div>
                     </div>
                 </div>
@@ -810,27 +839,27 @@
         </section>
 
         <section id="skills" class="container">
-            <h2 class="section-title" data-fa="توانمندی‌های تخصصی" data-en="Core Competencies">توانمندی‌های تخصصی</h2>
+            <h2 class="section-title" data-fa="توانمندی‌های تخصصی" data-en="Core Competencies" data-ckb="تواناییە پسپۆڕییەکان">توانمندی‌های تخصصی</h2>
             <div class="skills-grid">
                 <div class="skill-item">
                     <i class="fab fa-android"></i>
-                    <span data-fa="توسعه اپلیکیشن‌های اندروید" data-en="Android Development">توسعه اپلیکیشن‌های اندروید</span>
+                    <span data-fa="توسعه اپلیکیشن‌های اندروید" data-en="Android Development" data-ckb="داڕشتن بەرنامەکانی ئەندرۆید">طراحی و توسعه اپلیکیشن‌های اندروید</span>
                 </div>
                 <div class="skill-item">
                     <i class="fab fa-kickstarter-k"></i> 
-                    <span data-fa="کاتلین (Kotlin)" data-en="Kotlin">کاتلین (Kotlin)</span>
+                    <span data-fa="کاتلین (Kotlin)" data-en="Kotlin" data-ckb="کۆتلین (Kotlin)">کاتلین (Kotlin)</span>
                 </div>
                 <div class="skill-item">
                     <i class="fab fa-java"></i>
-                    <span data-fa="جاوا (Java)" data-en="Java">جاوا (Java)</span>
+                    <span data-fa="جاوا (Java)" data-en="Java" data-ckb="جاڤا (Java)">جاوا (Java)</span>
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-rocket"></i> 
-                    <span data-fa="Jetpack Compose" data-en="Jetpack Compose">Jetpack Compose</span>
+                    <span data-fa="Jetpack Compose" data-en="Jetpack Compose" data-ckb="جێتپەک کۆمپۆز">Jetpack Compose</span>
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-cogs"></i> 
-                    <span data-fa="کتابخانه‌های Jetpack" data-en="Jetpack Libraries">کتابخانه‌های Jetpack</span>
+                    <span data-fa="کتابخانه‌های Jetpack" data-en="Jetpack Libraries" data-ckb="کتێبخانەکانی جێتپەک">کتابخانه‌های Jetpack</span>
                 </div>
                 <div class="skill-item">
                     <i class="fab fa-php"></i>
@@ -846,95 +875,95 @@
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-link"></i> 
-                    <span data-fa="ORM (Object-Relational Mapping)" data-en="ORM (Object-Relational Mapping)">ORM</span>
+                    <span data-fa="ORM (Object-Relational Mapping)" data-en="ORM (Object-Relational Mapping)" data-ckb="ORM (نەخشەکێشانی پەیوەندیی شتەکان)">ORM</span>
                 </div>
             </div>
         </section>
         
         <section id="projects" class="container">
-            <h2 class="section-title" data-fa="پروژه‌های منتخب" data-en="Selected Projects">پروژه‌های منتخب</h2>
+            <h2 class="section-title" data-fa="پروژه‌های منتخب" data-en="Selected Projects" data-ckb="پڕۆژە هەڵبژێردراوەکان">پروژه‌های منتخب</h2>
             <div class="projects-grid">
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="واتس‌بات (WhatsBot)" data-en="WhatsBot">واتس‌بات (WhatsBot)</h3>
-                    <p class="client"><span data-fa="نوع پروژه:" data-en="Project Type:">نوع پروژه:</span> <span data-fa="شخصی (سفارش کارفرما)" data-en="Personal (Client Commission)">شخصی (سفارش کارفرما)</span></p>
-                    <p class="date" data-fa="تاریخ اجرا: تیرماه ۱۴۰۱" data-en="Execution Date: July 2022">تاریخ اجرا: تیرماه ۱۴۰۱</p>
-                    <p data-fa="توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است." data-en="Developed 'WhatsBot,' an Android application designed to streamline and automate extensive advertising processes on the WhatsApp messenger. Key implemented features include intelligent advertising campaign management and creation, bulk sending of diverse message formats (text, image, audio, video) without requiring contact storage, and providing analytical reports on campaign performance. The application leverages advanced Android services such as AccessibilityService and FloatingWindow Service to enhance efficiency and user experience.">توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است.</p>
+                    <h3 class="item-title" data-fa="واتس‌بات (WhatsBot)" data-en="WhatsBot" data-ckb="واتس‌بات (WhatsBot)">واتس‌بات (WhatsBot)</h3>
+                    <p class="client"><span data-fa="نوع پروژه:" data-en="Project Type:" data-ckb="جۆری پڕۆژە:">نوع پروژه:</span> <span data-fa="شخصی (سفارش کارفرما)" data-en="Personal (Client Commission)" data-ckb="تایبەت (داواکاریی خاوەنکار)">شخصی (سفارش کارفرما)</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: تیرماه ۱۴۰۱" data-en="Execution Date: July 2022" data-ckb="ڕێکەوتی جێبەجێکردن: پووشپەڕی ١٤٠١ی هەتاوی">تاریخ اجرا: تیرماه ۱۴۰۱</p>
+                    <p data-fa="توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است." data-en="Developed 'WhatsBot,' an Android application designed to streamline and automate extensive advertising processes on the WhatsApp messenger. Key implemented features include intelligent advertising campaign management and creation, bulk sending of diverse message formats (text, image, audio, video) without requiring contact storage, and providing analytical reports on campaign performance. The application leverages advanced Android services such as AccessibilityService and FloatingWindow Service to enhance efficiency and user experience." data-ckb="گەشەپێدانی بەرنامەی ئەندرۆیدی 'واتس‌بات' بە ئامانجی ئاسانکردن و خۆکارکردنی پرۆسەکانی بانگەشەی بەربڵاو لە نامەبەری واتس‌ئەپ. ئەم پڕۆژەیە بریتی بوو لە جێبەجێکردنی تایبەتمەندییە سەرەکییەکانی وەک بەڕێوەبردن و دروستکردنی کەمپەینی بانگەشەی زیرەک، ناردنی بەکۆمەڵیی نامەی جۆراوجۆر (دەق، وێنە، دەنگ و ڤیدیۆ) بەبێ پێویستی بە پاشەکەوتکردنی ژمارەکان، و پێشکەشکردنی ڕاپۆرتی شیکاری لەسەر ئەدای کەمپەینەکان. لە گەشەپێدانی ئەم نەرمامێرەدا، خزمەتگوزارییە پێشکەوتووەکانی ئەندرۆید وەک Accessibility Service و FloatingWindow Service بۆ زیادکردنی کارایی و ئەزموونی بەکارهێنەری باشتر بەکارهێنراون.">توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است.</p>
                 </div>
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="پولیکا کوین (Poolika Coin)" data-en="Poolika Coin">پولیکا کوین (Poolika Coin)</h3>
-                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="خانم فاطمه مظفری" data-en="Ms. Fatemeh Mozafari">خانم فاطمه مظفری</span></p>
-                    <p class="date" data-fa="تاریخ اجرا: مردادماه ۱۴۰۲" data-en="Execution Date: August 2023">تاریخ اجرا: مردادماه ۱۴۰۲</p>
-                    <p data-fa="طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است." data-en="Designed and implemented 'Poolika Coin,' an Android application enabling users to earn income by viewing advertisements. Focusing on optimal user experience, the project features a modern and engaging UI, integration with the Tapsell advertising service, email-based user registration and authentication, and a robust web-based admin panel for application management and data analysis. The system architecture relies on an online database and was developed using Java (for the Android app) and PHP (for the admin panel and API).">طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است.</p>
-                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:">فناوری‌های کلیدی:</strong> <span class="tech">Java, PHP, MySQL, Tapsell SDK</span></p>
+                    <h3 class="item-title" data-fa="پولیکا کوین (Poolika Coin)" data-en="Poolika Coin" data-ckb="پولیکا کۆین (Poolika Coin)">پولیکا کوین (Poolika Coin)</h3>
+                    <p class="client"><span data-fa="کارفرما:" data-en="Client:" data-ckb="خاوەنکار:">کارفرما:</span> <span data-fa="خانم فاطمه مظفری" data-en="Ms. Fatemeh Mozafari" data-ckb="خانمی فاتمە موزەفەری">خانم فاطمه مظفری</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: مردادماه ۱۴۰۲" data-en="Execution Date: August 2023" data-ckb="ڕێکەوتی جێبەجێکردن: گەلاوێژی ١٤٠٢ی هەتاوی">تاریخ اجرا: مردادماه ۱۴۰۲</p>
+                    <p data-fa="طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است." data-en="Designed and implemented 'Poolika Coin,' an Android application enabling users to earn income by viewing advertisements. Focusing on optimal user experience, the project features a modern and engaging UI, integration with the Tapsell advertising service, email-based user registration and authentication, and a robust web-based admin panel for application management and data analysis. The system architecture relies on an online database and was developed using Java (for the Android app) and PHP (for the admin panel and API)." data-ckb="داڕشتن و جێبەجێکردنی بەرنامەی ئەندرۆیدی 'پولیکا کۆین'، پلاتفۆڕمێک بۆ بەدەستهێنانی داهات لە ڕێگەی سەیرکردنی ڕیکلام. ئەم پڕۆژەیە بە تەرکیزکردن لەسەر ئەزموونی بەکارهێنەری گونجاو، تایبەتمەندییەکانی وەک ڕووکاری بەکارهێنەری نوێ و سەرنجڕاکێش، یەکخستن لەگەڵ خزمەتگوزاری ڕیکلامی تپسل، سیستەمی تۆمارکردن و پشتڕاستکردنەوەی ناسنامەی بەکارهێنەران لە ڕێگەی ئیمەیڵ، و پانێڵی بەڕێوەبردنی وێبی بەهێز بۆ ڕێنماییکردنی بەرنامە و شیکردنەوەی داتا لەخۆدەگرێت. بنیاتی ئەم سیستەمە لەسەر بنەمای داتابەیسی ئۆنلاین و بە بەکارهێنانی زمانەکانی جاڤا (بۆ بەرنامەی ئەندرۆید) و PHP (بۆ پانێڵی بەڕێوەبردن و API) گەشەی پێدراوە.">طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است.</p>
+                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:" data-ckb="تەکنەلۆژیا سەرەکییەکان:">فناوری‌های کلیدی:</strong> <span class="tech" data-fa="جاوا، PHP، مای‌اس‌کیو‌ال، SDK تپسل" data-en="Java, PHP, MySQL, Tapsell SDK" data-ckb="جاڤا، PHP، مای ئێس کیو ئێڵ، SDKی تپسل">جاوا، PHP، مای‌اس‌کیو‌ال، SDK تپسل</span></p>
                 </div>
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="روژ گالری (Roj Gallery)" data-en="Roj Gallery">روژ گالری (Roj Gallery)</h3>
-                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="فروشگاه روژ گالری" data-en="RojGallery Store">فروشگاه روژ گالری</span></p>
-                    <p class="date" data-fa="تاریخ اجرا: شهریورماه ۱۴۰۳" data-en="Execution Date: September 2024">تاریخ اجرا: شهریورماه ۱۴۰۳</p>
-                    <p data-fa="توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است." data-en="Developed 'Roj Gallery,' a comprehensive Android application for the integrated management of an online women's clothing store. Leveraging an online database, the system provides advanced management of products, categories, orders, and financial transactions. It also includes modules for managing admin users and tailors, precise step-by-step order tracking from placement to sewing and shipment, financial administration, and the generation of comprehensive sales reports for senior management. The application was implemented using Jetpack Compose for the UI and PHP for backend and API development.">توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است.</p>
-                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:">فناوری‌های کلیدی:</strong> <span class="tech" data-fa="Jetpack Compose, PHP, MySQL, RESTful APIs" data-en="Jetpack Compose, PHP, MySQL, RESTful APIs">Jetpack Compose, PHP, MySQL, RESTful APIs</span></p>
+                    <h3 class="item-title" data-fa="روژ گالری (Roj Gallery)" data-en="Roj Gallery" data-ckb="ڕۆژ گالێری (Roj Gallery)">روژ گالری (Roj Gallery)</h3>
+                    <p class="client"><span data-fa="کارفرما:" data-en="Client:" data-ckb="خاوەنکار:">کارفرما:</span> <span data-fa="فروشگاه روژ گالری" data-en="RojGallery Store" data-ckb="فرۆشگای ڕۆژ گالێری">فروشگاه روژ گالری</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: شهریورماه ۱۴۰۳" data-en="Execution Date: September 2024" data-ckb="ڕێکەوتی جێبەجێکردن: خەرمانانی ١٤٠٣ی هەتاوی">تاریخ اجرا: شهریورماه ۱۴۰۳</p>
+                    <p data-fa="توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است." data-en="Developed 'Roj Gallery,' a comprehensive Android application for the integrated management of an online women's clothing store. Leveraging an online database, the system provides advanced management of products, categories, orders, and financial transactions. It also includes modules for managing admin users and tailors, precise step-by-step order tracking from placement to sewing and shipment, financial administration, and the generation of comprehensive sales reports for senior management. The application was implemented using Jetpack Compose for the UI and PHP for backend and API development." data-ckb="گەشەپێدانی بەرنامەی گشتگیری ئەندرۆیدی 'ڕۆژ گالێری' بەمەبەستی بەڕێوەبردنی یەکپارچەی فرۆشگای ئۆنلاینی جلوبەرگی ژنان. ئەم سیستەمە بە بەکارهێنانی داتابەیسی ئۆنلاین، ئیمکاناتی وەک بەڕێوەبردنی پێشکەوتووی بەرهەمەکان، پۆلێنکردنەکان، داواکارییەکان و مامەڵە داراییەکان دابین دەکات. هەروەها مۆدیولەکانی بۆ بەڕێوەبردنی بەکارهێنەرانی ئەدمین و بەرگدرووەکان، شوێنپێهەڵگرتنی ورد و قۆناغ بە قۆناغی داواکارییەکان لە تۆمارکردنەوە تا دوورین و ناردن، بەڕێوەبردنی کاروباری دارایی و بەرهەمهێنانی ڕاپۆرتی فرۆشتنی گشتگیر بۆ بەڕێوەبەرانی باڵا لەخۆدەگرێت. ئەم بەرنامەیە بە بەکارهێنانی Jetpack Compose بۆ ڕووکاری بەکارهێنەر و PHP بۆ گەشەپێدانی بەکئێند و APIـەکان جێبەجێ کراوە.">توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است.</p>
+                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:" data-ckb="تەکنەلۆژیا سەرەکییەکان:">فناوری‌های کلیدی:</strong> <span class="tech" data-fa="Jetpack Compose, PHP, MySQL, RESTful APIs" data-en="Jetpack Compose, PHP, MySQL, RESTful APIs" data-ckb="جێتپەک کۆمپۆز، PHP، مای ئێس کیو ئێڵ، RESTful APIـەکان">Jetpack Compose, PHP, MySQL, RESTful APIs</span></p>
                 </div>
             </div>
         </section>
 
         <section id="experience" class="container">
-            <h2 class="section-title" data-fa="سوابق حرفه‌ای" data-en="Professional Experience">سوابق حرفه‌ای</h2>
+            <h2 class="section-title" data-fa="سوابق حرفه‌ای" data-en="Professional Experience" data-ckb="ئەزموونی پیشەیی">سوابق حرفه‌ای</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="item-title" data-fa="برنامه‌نویس فریلنسر اندروید و وب" data-en="Freelance Android & Web Developer">برنامه‌نویس فریلنسر اندروید و وب</h3>
-                        <h4 class="item-subtitle" data-fa="پلتفرم‌های پونیشا و پارسکدرز" data-en="Platforms: Ponisha & ParsCoders">پلتفرم‌های پونیشا و پارسکدرز</h4>
-                        <span class="date" data-fa="فروردین ۱۴۰۰ تاکنون" data-en="April 2021 - Present">فروردین ۱۴۰۰ تاکنون</span>
-                        <p data-fa="ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد." data-en="Provided specialized freelance programming services in native Android application development and PHP-based web systems. Collaborated with diverse clients through prominent domestic freelancing platforms to analyze requirements, design, implement, and support custom and efficient software solutions.">ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد.</p>
+                        <h3 class="item-title" data-fa="برنامه‌نویس فریلنسر اندروید و وب" data-en="Freelance Android & Web Developer" data-ckb="پڕۆگرامسازی سەربەخۆی ئەندرۆید و وێب">برنامه‌نویس فریلنسر اندروید و وب</h3>
+                        <h4 class="item-subtitle" data-fa="پلتفرم‌های پونیشا و پارسکدرز" data-en="Platforms: Ponisha & ParsCoders" data-ckb="پلاتفۆڕمەکانی پونیشا و پارسکۆدەرز">پلتفرم‌های پونیشا و پارسکدرز</h4>
+                        <span class="date" data-fa="فروردین ۱۴۰۰ تاکنون" data-en="April 2021 - Present" data-ckb="خاکەلێوەی ١٤٠٠ی هەتاوی - ئێستا">فروردین ۱۴۰۰ تاکنون</span>
+                        <p data-fa="ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد." data-en="Provided specialized freelance programming services in native Android application development and PHP-based web systems. Collaborated with diverse clients through prominent domestic freelancing platforms to analyze requirements, design, implement, and support custom and efficient software solutions." data-ckb="پێشکەشکردنی خزمەتگوزاری پسپۆڕیی پڕۆگرامسازی بە شێوەی سەربەخۆ (فریلانسەر) لە بواری گەشەپێدانی بەرنامەکانی نەیتڤی ئەندرۆید و سیستەمەکانی ژێر وێب بە PHP. هاوکاری لەگەڵ خاوەنکارانی جۆراوجۆر لە ڕێگەی پلاتفۆڕمە ناسراوەکانی فریلانسەری ناوخۆیی (پونیشا، پارسکۆدەرز) لەپێناو شیکردنەوەی پێداویستییەکان، داڕشتن، جێبەجێکردن و پشتیوانیکردنی چارەسەرە نەرمامێرییە تایبەت و کاراکان.">ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="item-title" data-fa="مدرس دوره برنامه‌نویسی اندروید" data-en="Android Programming Course Instructor">مدرس دوره برنامه‌نویسی اندروید</h3>
-                        <h4 class="item-subtitle" data-fa="آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان" data-en="County's Model Private Technical & Vocational Institute">آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان</h4>
-                        <span class="date" data-fa="تابستان ۱۴۰۲" data-en="Summer 2023">تابستان ۱۴۰۲</span>
-                        <p data-fa="برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید." data-en="Conducted and instructed a comprehensive introductory Android programming course (Java language) for a group of 10 interested students. This course was designed and successfully executed to teach fundamental concepts of mobile application development, working with the Android Studio IDE, and implementing small practical projects.">برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید.</p>
+                        <h3 class="item-title" data-fa="مدرس دوره برنامه‌نویسی اندروید" data-en="Android Programming Course Instructor" data-ckb="مامۆستای خولی پڕۆگرامسازیی ئەندرۆید">مدرس دوره برنامه‌نویسی اندروید</h3>
+                        <h4 class="item-subtitle" data-fa="آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان" data-en="County's Model Private Technical & Vocational Institute" data-ckb="پەیمانگای ئازادی تەکنیکی و پیشەیی نموونەیی شارستان">آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان</h4>
+                        <span class="date" data-fa="تابستان ۱۴۰۲" data-en="Summer 2023" data-ckb="هاوینی ١٤٠٢ی هەتاوی">تابستان ۱۴۰۲</span>
+                        <p data-fa="برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید." data-en="Conducted and instructed a comprehensive introductory Android programming course (Java language) for a group of 10 interested students. This course was designed and successfully executed to teach fundamental concepts of mobile application development, working with the Android Studio IDE, and implementing small practical projects." data-ckb="بەڕێوەبردن و وانەوتنەوەی خولێکی گشتگیری پڕۆگرامسازی سەرەتایی ئەندرۆید (زمانی جاڤا) بۆ کۆمەڵێک لە ١٠ خوێندکاری ئارەزوومەند. ئەم خولە بە ئامانجی فێرکردنی چەمکە بنەڕەتییەکانی گەشەپێدانی بەرنامەکانی مۆبایل، کارکردن لەگەڵ ژینگەی گەشەپێدانی ئەندرۆید ستۆدیۆ و جێبەجێکردنی پڕۆژەی کرداریی بچووک داڕێژرا و بە سەرکەوتوویی جێبەجێ کرا.">برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="education" class="container">
-            <h2 class="section-title" data-fa="سوابق تحصیلی" data-en="Education">سوابق تحصیلی</h2>
+            <h2 class="section-title" data-fa="سوابق تحصیلی" data-en="Education" data-ckb="باری خوێندن">سوابق تحصیلی</h2>
              <div class="card education-card">
-                <h3 class="item-title" data-fa="کارشناسی مهندسی کامپیوتر" data-en="Bachelor of Science in Computer Engineering">کارشناسی مهندسی کامپیوتر</h3>
-                <h4 class="item-subtitle" data-fa="دانشگاه صنعتی ارومیه - گرایش نرم‌افزار" data-en="Urmia University of Technology - Software Specialization">دانشگاه صنعتی ارومیه - گرایش نرم‌افزار</h4>
-                <span class="date" data-fa="۱۴۰۳ - در حال تحصیل" data-en="2024 - Present">۱۴۰۳ - در حال تحصیل</span>
-                <p data-fa="محل تحصیل: ارومیه، آذربایجان غربی" data-en="Location: Urmia, West Azerbaijan">محل تحصیل: ارومیه، آذربایجان غربی</p>
+                <h3 class="item-title" data-fa="کارشناسی مهندسی کامپیوتر" data-en="Bachelor of Science in Computer Engineering" data-ckb="بەکالۆریۆس لە ئەندازیاریی کۆمپیوتەر">کارشناسی مهندسی کامپیوتر</h3>
+                <h4 class="item-subtitle" data-fa="دانشگاه صنعتی ارومیه - گرایش نرم‌افزار" data-en="Urmia University of Technology - Software Specialization" data-ckb="زانکۆی سەنعەتیی ورمێ - پسپۆڕیی نەرمامێر">دانشگاه صنعتی ارومیه - گرایش نرم‌افزار</h4>
+                <span class="date" data-fa="۱۴۰۳ - در حال تحصیل" data-en="2024 - Present" data-ckb="١٤٠٣ی هەتاوی - ئێستا (لە خوێندندایە)">۱۴۰۳ - در حال تحصیل</span>
+                <p data-fa="محل تحصیل: ارومیه، آذربایجان غربی" data-en="Location: Urmia, West Azerbaijan" data-ckb="شوێنی خوێندن: ورمێ، ئازەربایجانی ڕۆژاوا">محل تحصیل: ارومیه، آذربایجان غربی</p>
             </div>
         </section>
 
         <section id="honors" class="container">
-            <h2 class="section-title" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors & Certificates">افتخارات و گواهینامه‌ها</h2>
+            <h2 class="section-title" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors & Certificates" data-ckb="ڕێزلێنان و بڕوانامەکان">افتخارات و گواهینامه‌ها</h2>
             <div class="honors-list">
                 <div class="card honor-item">
-                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)" data-en="1st Place, National Skills Competition (Mobile App Development - Youth Category)">مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)</h3>
-                    <p class="date" data-fa="تیرماه ۱۴۰۲" data-en="July 2023">تیرماه ۱۴۰۲</p>
-                    <p><a href="https://skills.irantvto.ir/news/Yjscresultstep" target="_blank" rel="noopener noreferrer" data-fa="مشاهده جزئیات" data-en="View Details">مشاهده جزئیات</a></p>
+                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)" data-en="1st Place, National Skills Competition (Mobile App Development - Youth Category)" data-ckb="پلەی یەکەم، پێشبڕکێی نیشتمانیی تواناکان (بواری گەشەپێدانی نەرمامێری مۆبایل - پۆلی لاوان)">مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)</h3>
+                    <p class="date" data-fa="تیرماه ۱۴۰۲" data-en="July 2023" data-ckb="پووشپەڕی ١٤٠٢ی هەتاوی">تیرماه ۱۴۰۲</p>
+                    <p><a href="https://skills.irantvto.ir/news/Yjscresultstep" target="_blank" rel="noopener noreferrer" data-fa="مشاهده جزئیات" data-en="View Details" data-ckb="بینینی وردەکارییەکان">مشاهده جزئیات</a></p>
                 </div>
                 <div class="card honor-item">
-                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)" data-en="1st Place, National Skills Competition (County & Provincial Stages)">مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)</h3>
-                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023">شهریورماه ۱۴۰۲</p>
+                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)" data-en="1st Place, National Skills Competition (County & Provincial Stages)" data-ckb="پلەی یەکەم، پێشبڕکێی نیشتمانیی تواناکان (قۆناغەکانی شارستان و پارێزگا)">مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)</h3>
+                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023" data-ckb="خەرمانانی ١٤٠٢ی هەتاوی">شهریورماه ۱۴۰۲</p>
                 </div>
                 <div class="card honor-item">
-                    <h3 class="item-title" data-fa="گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)" data-en="International Computer Driving License (ICDL)">گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)</h3>
-                    <p data-fa="صادره از: سازمان آموزش فنی و حرفه‌ای کشور" data-en="Issued by: Technical and Vocational Training Organization">صادره از: سازمان آموزش فنی و حرفه‌ای کشور</p>
-                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023">شهریورماه ۱۴۰۲</p>
+                    <h3 class="item-title" data-fa="گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)" data-en="International Computer Driving License (ICDL)" data-ckb="بڕوانامەی نێودەوڵەتیی بەکارهێنانی کۆمپیوتەر (ICDL)">گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)</h3>
+                    <p data-fa="صادره از: سازمان آموزش فنی و حرفه‌ای کشور" data-en="Issued by: Technical and Vocational Training Organization" data-ckb="دەرچوو لە: ڕێکخراوی ڕاهێنانی تەکنیکی و پیشەیی وڵات">صادره از: سازمان آموزش فنی و حرفه‌ای کشور</p>
+                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023" data-ckb="خەرمانانی ١٤٠٢ی هەتاوی">شهریورماه ۱۴۰۲</p>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="container">
-            <h2 class="section-title" data-fa="ارتباط با من" data-en="Contact Me">ارتباط با من</h2>
-            <p class="contact-prompt" data-fa="برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:" data-en="For collaboration, consultation, or any inquiries, feel free to reach out to me through the following channels:">برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:</p>
+            <h2 class="section-title" data-fa="ارتباط با من" data-en="Contact Me" data-ckb="پەیوەندی کردن بە من">ارتباط با من</h2>
+            <p class="contact-prompt" data-fa="برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:" data-en="For collaboration, consultation, or any inquiries, feel free to reach out to me through the following channels:" data-ckb="بۆ هاوکاری، ڕاوێژکاری یان هەر پرسیارێک، دەتوانن لە ڕێگەی ئەم شێوازانەی پەیوەندییەوە لەگەڵم لە پەیوەندیدا بن:">برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:</p>
             <div class="contact-links">
                 <a href="mailto:mrsYmehranni@gmail.com"><i class="fas fa-envelope"></i> mrsYmehranni@gmail.com</a>
-                <a href="tel:+989035872399"><i class="fas fa-phone"></i> ۰۹۸۹۰۳۵۸۷۲۳۹۹</a>
+                <a href="tel:+989035872399"><i class="fas fa-phone"></i> +۹۸۹۰۳۵۸۷۲۳۹۹</a>
             </div>
             <div class="social-links" style="margin-top: 20px; text-align: center;">
                  <a href="https://github.com/MehranMrIV" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -947,33 +976,43 @@
 
     <footer>
         <div class="container">
-            <p data-fa="کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳" data-en="All rights reserved for Mehran Rasoulzadeh. © 2024">کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳</p>
+            <p data-fa="کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳" data-en="All rights reserved for Mehran Rasoulzadeh. © 2024" data-ckb="هەموو مافێکی ئەم ماڵپەڕە پارێزراوە بۆ مێهران ڕەسولزادە. © ٢٠٢٤">کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳</p>
         </div>
     </footer>
 
     <script>
         // Language Switching
         const langButtons = document.querySelectorAll('.lang-switch button');
-        const translatableElements = document.querySelectorAll('[data-fa]');
+        const translatableElements = document.querySelectorAll('[data-fa], [data-en], [data-ckb]');
         const htmlEl = document.documentElement;
 
         function setLanguage(lang) {
             htmlEl.lang = lang;
-            htmlEl.dir = lang === 'fa' ? 'rtl' : 'ltr';
-            document.body.classList.toggle('lang-en', lang === 'en');
+            htmlEl.dir = (lang === 'fa' || lang === 'ckb') ? 'rtl' : 'ltr';
+            
+            document.body.classList.remove('lang-en', 'lang-fa', 'lang-ckb'); // Remove all lang classes
+            if (lang === 'en') {
+                document.body.classList.add('lang-en');
+            } else if (lang === 'ckb') {
+                document.body.classList.add('lang-ckb');
+            } else {
+                document.body.classList.add('lang-fa'); // Default to FA if lang is not EN or CKB
+            }
 
 
             translatableElements.forEach(el => {
-                if (el.children.length > 0 && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'SPAN')) {
-                    let textContent = el.dataset[lang];
-                    for (let i = 0; i < el.childNodes.length; i++) {
-                        if (el.childNodes[i].nodeType === Node.TEXT_NODE) {
-                            el.childNodes[i].nodeValue = textContent; 
-                            break; 
+                if (el.dataset[lang]) { 
+                    if (el.children.length > 0 && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'SPAN')) {
+                        let textContent = el.dataset[lang];
+                        for (let i = 0; i < el.childNodes.length; i++) {
+                            if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].nodeValue.trim() !== '') {
+                                el.childNodes[i].nodeValue = textContent; 
+                                break; 
+                            }
                         }
+                    } else {
+                        el.textContent = el.dataset[lang];
                     }
-                } else {
-                    el.textContent = el.dataset[lang];
                 }
             });
 
@@ -1032,7 +1071,7 @@
         });
 
         // Initialize
-        setLanguage('en'); 
+        setLanguage('fa'); 
         changeLinkState(); 
     </script>
 </body>

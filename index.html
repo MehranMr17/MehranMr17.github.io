@@ -8,27 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --background-color: #181A1B; /* Darker, slightly desaturated */
-            --card-background: #202324;  /* Slightly Lighter Gray */
-            --header-background: #1C1E1F; /* Specific dark for header */
-            --text-color: #E8E6E3;       /* Off-white, less stark */
-            --light-text-color: #B0B0B0; /* Medium Gray for sub-text */
-            
-            /* Softer Accents */
-            --primary-accent: #64B5F6;   /* Lighter Blue */
-            --secondary-accent: #81C784; /* Lighter Green */
-            
+            --background-color: #181A1B; 
+            --card-background: #202324;  
+            --header-background: #1C1E1F; 
+            --text-color: #E8E6E3;       
+            --light-text-color: #B0B0B0; 
             --border-color: #303436;
-
-            /* Softer Skill Icon Colors */
-            --skill-color-1: #81D4FA; /* Light Blue */
-            --skill-color-2: #A5D6A7; /* Light Green */
-            --skill-color-3: #FFD54F; /* Softer Amber */
-            --skill-color-4: #CE93D8; /* Soft Purple/Orchid */
-            --skill-color-5: #EF9A9A; /* Soft Red/Pink */
+            
+            --accent-1: #64B5F6;   /* Light Blue (Primary) */
+            --accent-2: #81C784;   /* Light Green (Secondary) */
+            --accent-3: #FFB74D;   /* Soft Orange (Tertiary) */
+            --accent-4: #BA68C8;   /* Medium Purple (Quaternary) */
+            
+            --skill-color-1: #81D4FA; 
+            --skill-color-2: #A5D6A7; 
+            --skill-color-3: #FFE082; 
+            --skill-color-4: #E1BEE7; 
+            --skill-color-5: #EF9A9A; 
 
             --border-radius: 8px;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Adjusted for dark mode */
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); 
             --transition-speed: 0.3s;
         }
 
@@ -78,12 +77,13 @@
         header .title-lang-switch {
             display: flex;
             align-items: center;
+            flex-shrink: 0; /* Prevent shrinking of title and lang switch */
         }
 
         header h1.site-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--text-color); /* Ensure title color is also from theme */
+            color: var(--text-color); 
         }
         html[dir="rtl"] header h1.site-title {
             margin-left: 20px; 
@@ -95,8 +95,8 @@
 
         .lang-switch button {
             background: none;
-            border: 1px solid var(--primary-accent);
-            color: var(--primary-accent);
+            border: 1px solid var(--accent-1); 
+            color: var(--accent-1);
             padding: 5px 10px;
             margin: 0 5px;
             cursor: pointer;
@@ -104,24 +104,27 @@
             transition: background-color var(--transition-speed), color var(--transition-speed);
         }
         .lang-switch button:hover, .lang-switch button.active {
-            background-color: var(--primary-accent);
+            background-color: var(--accent-1);
             color: var(--background-color);
         }
 
+        nav {
+            overflow-x: auto; /* Allow horizontal scrolling for nav on small screens if needed */
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
 
         nav ul {
             list-style: none;
             display: flex;
+            white-space: nowrap; /* Keep nav items on one line */
         }
 
-        nav ul li {
-            /* Default spacing handled by LTR/RTL specific */
-        }
         html[dir="rtl"] nav ul li {
-            margin-right: 18px; /* Increased base spacing slightly */
+            margin-right: 18px; 
         }
         html[dir="ltr"] nav ul li {
-            margin-left: 18px; /* Increased base spacing slightly */
+            margin-left: 18px; 
         }
 
         html[dir="rtl"] nav ul li:last-child {
@@ -131,12 +134,12 @@
             margin-left: 0;
         }
         
-        /* Specific spacing for "Honors" li item */
+        /* This rule adds space AFTER "Honors" (before "Contact") */
         html[dir="rtl"] nav ul li:has(a[href="#honors"]) {
-            margin-left: 15px; /* Adds extra space before "Contact" in RTL */
+            margin-left: 15px; 
         }
         html[dir="ltr"] nav ul li:has(a[href="#honors"]) {
-            margin-right: 15px; /* Adds extra space before "Contact" in LTR */
+            margin-right: 15px; 
         }
 
 
@@ -149,12 +152,10 @@
         }
 
         nav ul li a:hover, nav ul li a.active {
-            color: var(--primary-accent);
+            color: var(--accent-1); 
         }
 
-        main {
-           /* padding-top removed, handled by hero section */
-        }
+        main { }
 
         section {
             padding: 60px 0;
@@ -176,20 +177,29 @@
             text-align: center;
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-accent);
+            color: var(--accent-1); 
             margin-bottom: 40px;
             position: relative;
         }
 
-        section h2.section-title::after {
+        section h2.section-title::after { 
             content: '';
             display: block;
             width: 70px;
             height: 4px;
-            background-color: var(--secondary-accent);
+            background-color: var(--accent-2); 
             margin: 10px auto 0;
             border-radius: 2px;
         }
+        
+        #about h2.section-title::after { background-color: var(--accent-2); }
+        #skills h2.section-title::after { background-color: var(--accent-3); }
+        #projects h2.section-title::after { background-color: var(--accent-4); }
+        #experience h2.section-title::after { background-color: var(--accent-2); } 
+        #education h2.section-title::after { background-color: var(--accent-3); } 
+        #honors h2.section-title::after { background-color: var(--accent-4); }   
+        #contact h2.section-title::after { background-color: var(--accent-1); }
+
 
         .card {
             background-color: var(--card-background);
@@ -214,7 +224,7 @@
             text-align: center;
             color: var(--text-color);
             position: relative;
-            background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80'); /* New Placeholder Image */
+            background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -227,7 +237,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(24, 26, 27, 0.8); /* Slightly adjusted overlay for new bg */
+            background: rgba(24, 26, 27, 0.8); 
             z-index: 1;
         }
 
@@ -250,14 +260,14 @@
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 20px;
-            color: rgba(232, 230, 227, 0.9); /* Adjusted for text color */
+            color: rgba(232, 230, 227, 0.9); 
         }
         #hero .contact-info {
             font-size: 1.1rem;
             margin-bottom: 25px;
         }
         #hero .contact-info i {
-            color: var(--primary-accent);
+            color: var(--accent-1);
         }
         html[dir="rtl"] #hero .contact-info i {
             margin-left: 8px; 
@@ -269,6 +279,8 @@
          #hero .contact-info span, #hero .contact-info a {
             color: var(--text-color);
             text-decoration: none;
+            display: inline-block; 
+            margin-bottom: 5px; 
         }
         html[dir="rtl"] #hero .contact-info span, html[dir="rtl"] #hero .contact-info a {
              margin-right: 15px; 
@@ -277,7 +289,7 @@
              margin-left: 15px; 
         }
          #hero .contact-info a:hover {
-            color: var(--primary-accent);
+            color: var(--accent-1);
          }
         .social-links a {
             color: var(--text-color);
@@ -286,7 +298,7 @@
             transition: color var(--transition-speed);
         }
         .social-links a:hover {
-            color: var(--primary-accent);
+            color: var(--accent-1);
         }
 
 
@@ -301,7 +313,7 @@
             min-width: 300px;
         }
         #about h3.content-title { 
-            color: var(--secondary-accent);
+            color: var(--accent-2); 
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
@@ -316,7 +328,7 @@
             font-size: 1.1rem;
         }
          #about .personal-details-lang ul li strong {
-            color: var(--primary-accent);
+            color: var(--accent-1); 
          }
         #about .languages {
             margin-top: 30px;
@@ -327,7 +339,7 @@
             font-size: 1.1rem;
         }
         #about .language-item .stars {
-            color: var(--secondary-accent);
+            color: var(--accent-2); 
             font-size: 1.3rem;
         }
         html[dir="rtl"] #about .language-item .stars {
@@ -368,7 +380,7 @@
 
         #skills .skill-item:hover {
             transform: translateY(-5px);
-            background-color: var(--primary-accent);
+            background-color: var(--accent-1);
             color: var(--background-color);
         }
         #skills .skill-item:hover i {
@@ -381,13 +393,13 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto;
-            overflow: hidden; /* To contain floats */
+            overflow: hidden; 
         }
         .timeline::after {
             content: '';
             position: absolute;
             width: 4px;
-            background-color: var(--secondary-accent);
+            background-color: var(--accent-4); 
             top: 0;
             bottom: 0;
             z-index: 0;
@@ -402,7 +414,7 @@
         }
 
         .timeline-item {
-            padding-top: 10px; /* Reduced top/bottom padding */
+            padding-top: 10px; 
             padding-bottom: 10px;
             position: relative;
             width: 50%;
@@ -412,7 +424,7 @@
         html[dir="rtl"] .timeline-item:nth-child(odd) { 
             float: right;
             clear: right;
-            padding-left: 35px; /* Increased space from dot */
+            padding-left: 35px; 
             text-align: right;
         }
         html[dir="ltr"] .timeline-item:nth-child(odd) { 
@@ -425,7 +437,7 @@
         html[dir="rtl"] .timeline-item:nth-child(even) { 
             float: left;
             clear: left;
-            padding-right: 35px; /* Increased space from dot */
+            padding-right: 35px; 
             text-align: right;
         }
          html[dir="ltr"] .timeline-item:nth-child(even) { 
@@ -436,13 +448,13 @@
         }
 
 
-        .timeline-item::after {
+        .timeline-item::after { 
             content: '';
             position: absolute;
             width: 18px;
             height: 18px;
             background-color: var(--card-background);
-            border: 4px solid var(--secondary-accent);
+            border: 4px solid var(--accent-4); 
             top: 20px;
             border-radius: 50%;
             z-index: 1;
@@ -475,13 +487,13 @@
             transform: scale(1.02);
          }
         .timeline-content h3.item-title { 
+            color: var(--accent-3); 
             font-size: 1.4rem;
-            color: var(--primary-accent);
             margin-bottom: 8px;
         }
         .timeline-content h4.item-subtitle { 
+            color: var(--accent-4); 
             font-size: 1.1rem;
-            color: var(--secondary-accent);
             margin-bottom: 10px;
             font-weight: 400;
         }
@@ -493,7 +505,7 @@
         .timeline-content .date {
             font-size: 0.9rem;
             font-weight: bold;
-            color: var(--primary-accent);
+            color: var(--accent-1); 
             display: block;
             margin-bottom: 10px;
         }
@@ -506,8 +518,8 @@
             gap: 25px;
         }
         #projects .project-card h3.item-title { 
+            color: var(--accent-4); 
             font-size: 1.5rem;
-            color: var(--secondary-accent);
             margin-bottom: 10px;
         }
         #projects .project-card p {
@@ -522,7 +534,7 @@
         }
         #projects .project-card .tech-label {
             font-weight: bold;
-            color: var(--primary-accent);
+            color: var(--accent-1); 
         }
         #projects .project-card .tech {
             font-size: 0.85rem;
@@ -530,9 +542,6 @@
         }
 
         /* Education Section - Full Width Card */
-        #education .education-card {
-            /* Default is text-align: right via html[dir="rtl"] */
-        }
         html[dir="rtl"] #education .education-card {
             text-align: right;
         }
@@ -540,13 +549,13 @@
             text-align: left;
         }
          #education .education-card h3.item-title { 
+            color: var(--accent-2); 
             font-size: 1.6rem;
-            color: var(--primary-accent);
             margin-bottom: 10px;
          }
          #education .education-card h4.item-subtitle { 
+            color: var(--accent-3); 
             font-size: 1.2rem;
-            color: var(--secondary-accent);
             margin-bottom: 8px;
          }
         #education .education-card p {
@@ -556,7 +565,7 @@
         }
          #education .education-card .date {
             font-weight: bold;
-            color: var(--primary-accent);
+            color: var(--accent-1); 
             display: block;
             margin-bottom: 15px;
             font-size: 1rem;
@@ -569,9 +578,6 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
-        #honors .honor-item {
-             /* Default is text-align: right via html[dir="rtl"] */
-        }
         html[dir="rtl"] #honors .honor-item {
             text-align: right;
          }
@@ -579,15 +585,14 @@
             text-align: left;
          }
          #honors .honor-item h3.item-title { 
-            font-size: 1.3rem;
-            color: var(--secondary-accent);
+            color: var(--accent-3); 
          }
          #honors .honor-item p {
              color: var(--light-text-color);
              font-size: 1rem;
          }
          #honors .honor-item a {
-            color: var(--primary-accent);
+            color: var(--accent-1); 
             text-decoration: none;
             font-weight: bold;
          }
@@ -606,7 +611,7 @@
         }
         #contact .contact-links a {
             font-size: 1.2rem;
-            color: var(--primary-accent);
+            color: var(--accent-1); 
             text-decoration: none;
             margin: 0 15px;
             transition: color var(--transition-speed);
@@ -614,10 +619,7 @@
             margin-bottom: 10px;
         }
         #contact .contact-links a:hover {
-            color: var(--secondary-accent);
-        }
-        #contact .contact-links i {
-            /* Default margin handled by LTR/RTL specific */
+            color: var(--accent-2); 
         }
         html[dir="rtl"] #contact .contact-links i {
             margin-left: 8px; 
@@ -650,19 +652,20 @@
             }
             nav {
                 width: 100%;
-                overflow-x: auto; 
+                /* overflow-x: auto; -- Kept from previous */
             }
             nav ul {
-                justify-content: flex-start; /* Allow scroll to start from beginning */
-                padding: 0 10px; /* Ensure some padding for scrolled items */
+                /* justify-content: flex-start; -- Kept from previous */
+                padding: 0 5px; /* Slightly reduce padding if items are many */
             }
-            html[dir="rtl"] nav ul li, html[dir="ltr"] nav ul li { /* Consistent mobile spacing */
-                margin: 0 10px !important;
+            html[dir="rtl"] nav ul li, html[dir="ltr"] nav ul li { 
+                margin: 0 8px !important; /* Reduced margin for mobile nav items */
+                font-size: 0.9rem; /* Slightly smaller font for mobile nav */
             }
              html[dir="rtl"] nav ul li:has(a[href="#honors"]),
-             html[dir="ltr"] nav ul li:has(a[href="#honors"]) { /* Reset specific desktop spacing for mobile */
-                margin-left: 10px !important; /* RTL */
-                margin-right: 10px !important; /* LTR */
+             html[dir="ltr"] nav ul li:has(a[href="#honors"]) { 
+                margin-left: 8px !important; 
+                margin-right: 8px !important; 
             }
 
 
@@ -690,7 +693,7 @@
             section h2.section-title {
                 font-size: 1.8rem;
             }
-            /* Timeline adjustments for mobile */
+            
             html[dir="rtl"] .timeline::after {
                 right: 20px; 
                 left: auto;
@@ -747,14 +750,14 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#hero" class="active nav-link" data-fa="خانه" data-en="Home">خانه</a></li>
-                    <li><a href="#about" class="nav-link" data-fa="درباره من" data-en="About">درباره من</a></li>
-                    <li><a href="#skills" class="nav-link" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a></li>
-                    <li><a href="#projects" class="nav-link" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a></li>
-                    <li><a href="#experience" class="nav-link" data-fa="سوابق" data-en="Experience">سوابق</a></li>
-                    <li><a href="#education" class="nav-link" data-fa="تحصیلات" data-en="Education">تحصیلات</a></li>
-                    <li><a href="#honors" class="nav-link" data-fa="افتخارات" data-en="Honors">Honors</a></li>
-                    <li><a href="#contact" class="nav-link" data-fa="تماس" data-en="Contact">تماس</a></li>
+                    <li><a href="#hero" class="active nav-link" data-fa="مقدمه" data-en="Home">مقدمه</a></li>
+                    <li><a href="#about" class="nav-link" data-fa="درباره‌ من" data-en="About">درباره‌ من</a></li>
+                    <li><a href="#skills" class="nav-link" data-fa="توانمندی‌ها" data-en="Skills">توانمندی‌ها</a></li>
+                    <li><a href="#projects" class="nav-link" data-fa="پروژه‌های منتخب" data-en="Projects">پروژه‌های منتخب</a></li>
+                    <li><a href="#experience" class="nav-link" data-fa="سوابق حرفه‌ای" data-en="Experience">سوابق حرفه‌ای</a></li>
+                    <li><a href="#education" class="nav-link" data-fa="سوابق تحصیلی" data-en="Education">سوابق تحصیلی</a></li>
+                    <li><a href="#honors" class="nav-link" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors">افتخارات و گواهینامه‌ها</a></li>
+                    <li><a href="#contact" class="nav-link" data-fa="ارتباط با من" data-en="Contact">ارتباط با من</a></li>
                 </ul>
             </nav>
         </div>
@@ -764,11 +767,11 @@
         <section id="hero">
             <div class="container hero-content">
                 <h1 class="hero-name" data-fa="مهران رسول زاده" data-en="Mehran Rasoulzadeh">مهران رسول زاده</h1>
-                <p class="subtitle" data-fa="توسعه دهنده اندروید" data-en="Android Developer">توسعه دهنده اندروید</p>
+                <p class="subtitle" data-fa="توسعه‌دهنده متخصص اپلیکیشن‌های اندروید" data-en="Specialized Android Application Developer">توسعه‌دهنده متخصص اپلیکیشن‌های اندروید</p>
                 <div class="contact-info">
-                    <a href="mailto:mrsYmehranni@gmail.com"><i class="fas fa-envelope"></i> mrsYmehranni@gmail.com</a>
                     <span><i class="fas fa-phone"></i> ۰۹۸۹۰۳۵۸۷۲۳۹۹</span>
-                    <span data-fa="آذربایجان غربی، ارومیه" data-en="Urmia, West Azerbaijan"><i class="fas fa-map-marker-alt"></i> آذربایجان غربی، ارومیه</span>
+                    <a href="mailto:mrsYmehranni@gmail.com"><i class="fas fa-envelope"></i> mrsYmehranni@gmail.com</a>
+                    <span data-fa="ایران، آذربایجان غربی، ارومیه" data-en="Urmia, West Azerbaijan, Iran"><i class="fas fa-map-marker-alt"></i> ایران، آذربایجان غربی، ارومیه</span>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/MehranMrIV" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -780,26 +783,26 @@
         </section>
 
         <section id="about" class="container">
-            <h2 class="section-title" data-fa="درباره من" data-en="About Me">درباره من</h2>
+            <h2 class="section-title" data-fa="درباره‌ من" data-en="About Me">درباره‌ من</h2>
             <div class="about-content">
                 <div class="summary card">
-                    <h3 class="content-title" data-fa="خلاصه رزومه" data-en="Summary">خلاصه رزومه</h3>
-                    <p data-fa="توسعه‌دهنده اندروید با اشتیاق فراوان به حل چالش‌های منطقی و خلق راهکارهای نوآورانه. برنامه‌نویسی برای من نه تنها یک حرفه، بلکه مسیری برای تبدیل ایده‌ها به واقعیت‌های کاربردی است. مشتاقانه در پی فرصتی هستم تا در کنار تیمی پویا، مهارت‌های خود را ارتقا داده و در مسیر پیشرفت و موفقیت مجموعه شما سهیم باشم." data-en="Android developer with a strong passion for solving logical challenges and creating innovative solutions. For me, programming is not just a profession, but a path to transform ideas into practical realities. I am eagerly seeking an opportunity to enhance my skills alongside a dynamic team and contribute to your organization's progress and success.">توسعه‌دهنده اندروید با اشتیاق فراوان به حل چالش‌های منطقی و خلق راهکارهای نوآورانه. برنامه‌نویسی برای من نه تنها یک حرفه، بلکه مسیری برای تبدیل ایده‌ها به واقعیت‌های کاربردی است. مشتاقانه در پی فرصتی هستم تا در کنار تیمی پویا، مهارت‌های خود را ارتقا داده و در مسیر پیشرفت و موفقیت مجموعه شما سهیم باشم.</p>
+                    <h3 class="content-title" data-fa="نگاهی اجمالی" data-en="Overview">نگاهی اجمالی</h3>
+                    <p data-fa="من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم." data-en="I am an Android developer who deeply believes in the power of technology to solve complex challenges and create innovative user experiences. For me, programming is more than just a job; it's an art and a tool for transforming creative ideas into functional and impactful software products. I am always eager to learn new technologies and apply them to challenging projects, and I welcome collaboration with dynamic, goal-oriented teams to achieve common objectives and enhance my technical skills.">من یک توسعه‌دهنده اندروید هستم که عمیقاً به قدرت فناوری برای حل چالش‌های پیچیده و خلق تجربیات کاربری نوآورانه باور دارم. برنامه‌نویسی برای من فراتر از یک شغل، یک هنر و ابزاری برای تبدیل ایده‌های خلاقانه به محصولات نرم‌افزاری کاربردی و تاثیرگذار است. همواره مشتاق یادگیری فناوری‌های نوین و به‌کارگیری آن‌ها در پروژه‌های چالش‌برانگیز هستم و از همکاری با تیم‌های پویا و هدفمند برای دستیابی به اهداف مشترک و ارتقای سطح مهارت‌های فنی خود استقبال می‌کنم.</p>
                 </div>
                 <div class="personal-details-lang card">
-                    <h3 class="content-title" data-fa="اطلاعات شخصی" data-en="Personal Details">اطلاعات شخصی</h3>
+                    <h3 class="content-title" data-fa="اطلاعات فردی" data-en="Personal Details">اطلاعات فردی</h3>
                     <ul>
-                        <li><strong data-fa="متولد:" data-en="Born:">متولد:</strong> <span data-fa="۱۳۸۴/۱۱/۲۴" data-en="2006/02/13">۱۳۸۴/۱۱/۲۴</span></li>
-                        <li><strong data-fa="وضعیت تاهل:" data-en="Marital Status:">وضعیت تاهل:</strong> <span data-fa="مجرد" data-en="Single">مجرد</span></li>
-                        <li><strong data-fa="وضعیت سربازی:" data-en="Military Service:">وضعیت سربازی:</strong> <span data-fa="معافیت تحصیلی" data-en="Educational Exemption">معافیت تحصیلی</span></li>
+                        <li><strong data-fa="تاریخ تولد:" data-en="Date of Birth:">تاریخ تولد:</strong> <span data-fa="۱۳۸۴/۱۱/۲۴" data-en="February 13, 2006">۱۳۸۴/۱۱/۲۴</span></li>
+                        <li><strong data-fa="وضعیت تأهل:" data-en="Marital Status:">وضعیت تأهل:</strong> <span data-fa="مجرد" data-en="Single">مجرد</span></li>
+                        <li><strong data-fa="وضعیت نظام‌وظیفه:" data-en="Military Service:">وضعیت نظام‌وظیفه:</strong> <span data-fa="معافیت تحصیلی" data-en="Educational Exemption">معافیت تحصیلی</span></li>
                     </ul>
                     <div class="languages">
-                        <h3 class="content-title" data-fa="زبان‌ها" data-en="Languages">زبان‌ها</h3>
+                        <h3 class="content-title" data-fa="مهارت‌های زبانی" data-en="Language Skills">مهارت‌های زبانی</h3>
                         <div class="language-item">
-                            <span data-fa="فارسی:" data-en="Persian:">فارسی:</span> <span class="stars">★★★★★</span>
+                            <span data-fa="فارسی (زبان مادری):" data-en="Persian (Native):">فارسی (زبان مادری):</span> <span class="stars">★★★★★</span>
                         </div>
                         <div class="language-item">
-                            <span data-fa="انگلیسی:" data-en="English:">انگلیسی:</span> <span class="stars">★★☆☆☆</span>
+                            <span data-fa="انگلیسی (پیشرفته):" data-en="English (Advanced):">انگلیسی (پیشرفته):</span> <span class="stars">★★★★★</span>
                         </div>
                     </div>
                 </div>
@@ -807,18 +810,19 @@
         </section>
 
         <section id="skills" class="container">
-            <h2 class="section-title" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</h2>
+            <h2 class="section-title" data-fa="توانمندی‌های تخصصی" data-en="Core Competencies">توانمندی‌های تخصصی</h2>
             <div class="skills-grid">
                 <div class="skill-item">
                     <i class="fab fa-android"></i>
-                    <span data-fa="طراحی و توسعه اپلیکیشن اندروید" data-en="Android App Design & Development">طراحی و توسعه اپلیکیشن اندروید</span>
+                    <span data-fa="طراحی و توسعه اپلیکیشن‌های اندروید" data-en="Android Application Design & Development">طراحی و توسعه اپلیکیشن‌های اندروید</span>
                 </div>
                 <div class="skill-item">
-                    <i class="fab fa-kickstarter-k"></i> Kotlin
+                    <i class="fab fa-kickstarter-k"></i> 
+                    <span data-fa="کاتلین (Kotlin)" data-en="Kotlin">کاتلین (Kotlin)</span>
                 </div>
                 <div class="skill-item">
                     <i class="fab fa-java"></i>
-                    Java
+                    <span data-fa="جاوا (Java)" data-en="Java">جاوا (Java)</span>
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-rocket"></i> 
@@ -826,7 +830,7 @@
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-cogs"></i> 
-                    <span data-fa="Jetpack Libs" data-en="Jetpack Libs">Jetpack Libs</span>
+                    <span data-fa="کتابخانه‌های Jetpack" data-en="Jetpack Libraries">کتابخانه‌های Jetpack</span>
                 </div>
                 <div class="skill-item">
                     <i class="fab fa-php"></i>
@@ -842,54 +846,54 @@
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-link"></i> 
-                    ORM
+                    <span data-fa="ORM (Object-Relational Mapping)" data-en="ORM (Object-Relational Mapping)">ORM</span>
                 </div>
             </div>
         </section>
         
         <section id="projects" class="container">
-            <h2 class="section-title" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</h2>
+            <h2 class="section-title" data-fa="پروژه‌های منتخب" data-en="Selected Projects">پروژه‌های منتخب</h2>
             <div class="projects-grid">
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="واتس بات" data-en="WhatsBot">واتس بات</h3>
-                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="شخصی" data-en="Personal Client">شخصی</span></p>
-                    <p class="date" data-fa="تیر ۱۴۰۱" data-en="July 2022">تیر ۱۴۰۱</p>
-                    <p data-fa="اپلیکیشنی برای تبلیغات آسان و گسترده در پیام‌رسان واتس‌اپ. شامل ساخت کمپین، ارسال پیام‌های متنوع، مدیریت تبلیغات، گزارش‌گیری و کار با Accessibility Service و FloatingService." data-en="Application for easy and widespread advertising on WhatsApp. Features include campaign creation, sending various message types, ad management, reporting, and working with Accessibility Service & FloatingService.">اپلیکیشنی برای تبلیغات آسان و گسترده در پیام‌رسان واتس‌اپ. شامل ساخت کمپین، ارسال پیام‌های متنوع، مدیریت تبلیغات، گزارش‌گیری و کار با Accessibility Service و FloatingService.</p>
+                    <h3 class="item-title" data-fa="واتس‌بات (WhatsBot)" data-en="WhatsBot">واتس‌بات (WhatsBot)</h3>
+                    <p class="client"><span data-fa="نوع پروژه:" data-en="Project Type:">نوع پروژه:</span> <span data-fa="شخصی (سفارش کارفرما)" data-en="Personal (Client Commission)">شخصی (سفارش کارفرما)</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: تیرماه ۱۴۰۱" data-en="Execution Date: July 2022">تاریخ اجرا: تیرماه ۱۴۰۱</p>
+                    <p data-fa="توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است." data-en="Developed 'WhatsBot,' an Android application designed to streamline and automate extensive advertising processes on the WhatsApp messenger. Key implemented features include intelligent advertising campaign management and creation, bulk sending of diverse message formats (text, image, audio, video) without requiring contact storage, and providing analytical reports on campaign performance. The application leverages advanced Android services such as AccessibilityService and FloatingWindow Service to enhance efficiency and user experience.">توسعه اپلیکیشن اندرویدی 'واتس‌بات' با هدف تسهیل و اتوماسیون فرآیندهای تبلیغاتی گسترده در پیام‌رسان واتس‌اپ. این پروژه شامل پیاده‌سازی قابلیت‌های کلیدی نظیر مدیریت و ایجاد کمپین‌های تبلیغاتی هوشمند، ارسال دسته‌ای پیام‌های متنوع (متن، تصویر، صدا و ویدیو) بدون نیاز به ذخیره‌سازی مخاطبین، و ارائه گزارش‌های تحلیلی از عملکرد کمپین‌ها بوده است. در توسعه این نرم‌افزار از سرویس‌های پیشرفته اندروید نظیر Accessibility Service و FloatingWindow Service به‌منظور افزایش کارایی و تجربه کاربری بهینه بهره‌گیری شده است.</p>
                 </div>
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="پولیکا کوین" data-en="Poolika Coin">پولیکا کوین</h3>
-                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="فاطمه مظفری" data-en="Fatemeh Mozafari">فاطمه مظفری</span></p>
-                    <p class="date" data-fa="مرداد ۱۴۰۲" data-en="August 2023">مرداد ۱۴۰۲</p>
-                    <p data-fa="اپلیکیشن &quot;تبلیغ ببین و درآمد کسب کن&quot; با طراحی زیبا، استفاده از تبلیغات تپسل، ثبت نام با ایمیل، بخش مدیریت حرفه‌ای و دیتابیس آنلاین." data-en="&quot;Watch ads and earn income&quot; app with a beautiful design, Tapsell ad integration, email registration, professional admin panel, and online database.">اپلیکیشن &quot;تبلیغ ببین و درآمد کسب کن&quot; با طراحی زیبا، استفاده از تبلیغات تپسل، ثبت نام با ایمیل، بخش مدیریت حرفه‌ای و دیتابیس آنلاین.</p>
-                    <p><strong class="tech-label" data-fa="تکنولوژی‌ها:" data-en="Technologies:">تکنولوژی‌ها:</strong> <span class="tech">Java, PHP</span></p>
+                    <h3 class="item-title" data-fa="پولیکا کوین (Poolika Coin)" data-en="Poolika Coin">پولیکا کوین (Poolika Coin)</h3>
+                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="خانم فاطمه مظفری" data-en="Ms. Fatemeh Mozafari">خانم فاطمه مظفری</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: مردادماه ۱۴۰۲" data-en="Execution Date: August 2023">تاریخ اجرا: مردادماه ۱۴۰۲</p>
+                    <p data-fa="طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است." data-en="Designed and implemented 'Poolika Coin,' an Android application enabling users to earn income by viewing advertisements. Focusing on optimal user experience, the project features a modern and engaging UI, integration with the Tapsell advertising service, email-based user registration and authentication, and a robust web-based admin panel for application management and data analysis. The system architecture relies on an online database and was developed using Java (for the Android app) and PHP (for the admin panel and API).">طراحی و پیاده‌سازی اپلیکیشن اندرویدی 'پولیکا کوین'، پلتفرمی برای کسب درآمد از طریق مشاهده تبلیغات. این پروژه با تمرکز بر تجربه کاربری مطلوب، شامل ویژگی‌هایی چون رابط کاربری مدرن و جذاب، یکپارچه‌سازی با سرویس تبلیغاتی تپسل، سیستم ثبت نام و احراز هویت کاربران از طریق ایمیل، و پنل مدیریت تحت وب قدرتمند برای راهبری اپلیکیشن و تحلیل داده‌ها می‌باشد. معماری این سیستم بر پایه دیتابیس آنلاین و با استفاده از زبان‌های جاوا (برای اپلیکیشن اندروید) و PHP (برای پنل مدیریت و API) توسعه داده شده است.</p>
+                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:">فناوری‌های کلیدی:</strong> <span class="tech">Java, PHP, MySQL, Tapsell SDK</span></p>
                 </div>
                 <div class="card project-card">
-                    <h3 class="item-title" data-fa="روژ گالری" data-en="Roj Gallery">روژ گالری</h3>
-                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> RojGallery</p>
-                    <p class="date" data-fa="شهریور ۱۴۰۳" data-en="September 2024">شهریور ۱۴۰۳</p>
-                    <p data-fa="اپلیکیشن مدیریت فروشگاه بزرگ لباس زنانه با دیتابیس آنلاین برای محصولات، سفارش‌ها، تراکنش‌ها و مدیریت کاربران. شامل رهگیری سفارش، مدیریت مالی و گزارش فروش." data-en="Management app for a large women's clothing store with an online database for products, orders, transactions, and user management. Includes order tracking, financial management, and sales reports.">اپلیکیشن مدیریت فروشگاه بزرگ لباس زنانه با دیتابیس آنلاین برای محصولات، سفارش‌ها، تراکنش‌ها و مدیریت کاربران. شامل رهگیری سفارش، مدیریت مالی و گزارش فروش.</p>
-                    <p><strong class="tech-label" data-fa="تکنولوژی‌ها:" data-en="Technologies:">تکنولوژی‌ها:</strong> <span class="tech" data-fa="Jetpack compose و php" data-en="Jetpack Compose, PHP">Jetpack compose و php</span></p>
+                    <h3 class="item-title" data-fa="روژ گالری (Roj Gallery)" data-en="Roj Gallery">روژ گالری (Roj Gallery)</h3>
+                    <p class="client"><span data-fa="کارفرما:" data-en="Client:">کارفرما:</span> <span data-fa="فروشگاه روژ گالری" data-en="RojGallery Store">فروشگاه روژ گالری</span></p>
+                    <p class="date" data-fa="تاریخ اجرا: شهریورماه ۱۴۰۳" data-en="Execution Date: September 2024">تاریخ اجرا: شهریورماه ۱۴۰۳</p>
+                    <p data-fa="توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است." data-en="Developed 'Roj Gallery,' a comprehensive Android application for the integrated management of an online women's clothing store. Leveraging an online database, the system provides advanced management of products, categories, orders, and financial transactions. It also includes modules for managing admin users and tailors, precise step-by-step order tracking from placement to sewing and shipment, financial administration, and the generation of comprehensive sales reports for senior management. The application was implemented using Jetpack Compose for the UI and PHP for backend and API development.">توسعه اپلیکیشن جامع اندرویدی 'روژ گالری' جهت مدیریت یکپارچه فروشگاه آنلاین پوشاک زنانه. این سیستم با بهره‌گیری از دیتابیس آنلاین، امکاناتی نظیر مدیریت پیشرفته محصولات، دسته‌بندی‌ها، سفارش‌ها و تراکنش‌های مالی را فراهم می‌آورد. همچنین شامل ماژول‌هایی برای مدیریت کاربران ادمین و خیاطان، رهگیری دقیق و مرحله به مرحله سفارشات از ثبت تا دوخت و ارسال، مدیریت امور مالی و تولید گزارش‌های فروش جامع برای مدیران ارشد می‌باشد. این اپلیکیشن با استفاده از Jetpack Compose برای رابط کاربری و PHP برای توسعه بک‌اند و API ها پیاده‌سازی شده است.</p>
+                    <p><strong class="tech-label" data-fa="فناوری‌های کلیدی:" data-en="Key Technologies:">فناوری‌های کلیدی:</strong> <span class="tech" data-fa="Jetpack Compose, PHP, MySQL, RESTful APIs" data-en="Jetpack Compose, PHP, MySQL, RESTful APIs">Jetpack Compose, PHP, MySQL, RESTful APIs</span></p>
                 </div>
             </div>
         </section>
 
         <section id="experience" class="container">
-            <h2 class="section-title" data-fa="سوابق شغلی و تدریس" data-en="Work & Teaching Experience">سوابق شغلی و تدریس</h2>
+            <h2 class="section-title" data-fa="سوابق حرفه‌ای" data-en="Professional Experience">سوابق حرفه‌ای</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="item-title" data-fa="برنامه نویس فریلنسر" data-en="Freelance Programmer">برنامه نویس فریلنسر</h3>
-                        <h4 class="item-subtitle" data-fa="سایت‌های فریلنسری پونیشا و پارسکدرز" data-en="Freelancing sites: Ponisha & ParsCoders">سایت‌های فریلنسری پونیشا و پارسکدرز</h4>
-                        <span class="date" data-fa="فروردین ۱۴۰۰ - اکنون" data-en="April 2021 - Present">فروردین ۱۴۰۰ - اکنون</span>
-                        <p data-fa="فعالیت به عنوان توسعه‌دهنده اندروید و PHP در پلتفرم‌های فریلنسری." data-en="Worked as an Android and PHP developer on freelance platforms.">فعالیت به عنوان توسعه‌دهنده اندروید و PHP در پلتفرم‌های فریلنسری.</p>
+                        <h3 class="item-title" data-fa="برنامه‌نویس فریلنسر اندروید و وب" data-en="Freelance Android & Web Developer">برنامه‌نویس فریلنسر اندروید و وب</h3>
+                        <h4 class="item-subtitle" data-fa="پلتفرم‌های پونیشا و پارسکدرز" data-en="Platforms: Ponisha & ParsCoders">پلتفرم‌های پونیشا و پارسکدرز</h4>
+                        <span class="date" data-fa="فروردین ۱۴۰۰ تاکنون" data-en="April 2021 - Present">فروردین ۱۴۰۰ تاکنون</span>
+                        <p data-fa="ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد." data-en="Provided specialized freelance programming services in native Android application development and PHP-based web systems. Collaborated with diverse clients through prominent domestic freelancing platforms to analyze requirements, design, implement, and support custom and efficient software solutions.">ارائه خدمات تخصصی برنامه‌نویسی به صورت مستقل (فریلنسر) در زمینه توسعه اپلیکیشن‌های نیتیو اندروید و سیستم‌های تحت وب با PHP. همکاری با کارفرمایان متعدد از طریق پلتفرم‌های مطرح فریلنسری داخلی در راستای تحلیل نیازمندی‌ها، طراحی، پیاده‌سازی و پشتیبانی راه‌حل‌های نرم‌افزاری سفارشی و کارآمد.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="item-title" data-fa="مدرس برنامه نویسی اندروید" data-en="Android Programming Instructor">مدرس برنامه نویسی اندروید</h3>
-                        <h4 class="item-subtitle" data-fa="آموزشگاه آزاد شهرستان" data-en="Private Training Institute of the County">آموزشگاه آزاد شهرستان</h4>
+                        <h3 class="item-title" data-fa="مدرس دوره برنامه‌نویسی اندروید" data-en="Android Programming Course Instructor">مدرس دوره برنامه‌نویسی اندروید</h3>
+                        <h4 class="item-subtitle" data-fa="آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان" data-en="County's Model Private Technical & Vocational Institute">آموزشگاه آزاد فنی و حرفه‌ای نمونه شهرستان</h4>
                         <span class="date" data-fa="تابستان ۱۴۰۲" data-en="Summer 2023">تابستان ۱۴۰۲</span>
-                        <p data-fa="برگزاری دوره مقدماتی برنامه‌نویسی اندروید برای ۱۰ دانش‌آموز." data-en="Conducted an introductory Android programming course for 10 students.">برگزاری دوره مقدماتی برنامه‌نویسی اندروید برای ۱۰ دانش‌آموز.</p>
+                        <p data-fa="برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید." data-en="Conducted and instructed a comprehensive introductory Android programming course (Java language) for a group of 10 interested students. This course was designed and successfully executed to teach fundamental concepts of mobile application development, working with the Android Studio IDE, and implementing small practical projects.">برگزاری و تدریس یک دوره جامع برنامه‌نویسی مقدماتی اندروید (زبان جاوا) برای جمعی متشکل از ۱۰ دانش‌پژوه علاقه‌مند. این دوره با هدف آموزش مفاهیم بنیادی توسعه اپلیکیشن‌های موبایل، کار با محیط توسعه اندروید استودیو و پیاده‌سازی پروژه‌های عملی کوچک طراحی و با موفقیت اجرا گردید.</p>
                     </div>
                 </div>
             </div>
@@ -898,10 +902,10 @@
         <section id="education" class="container">
             <h2 class="section-title" data-fa="سوابق تحصیلی" data-en="Education">سوابق تحصیلی</h2>
              <div class="card education-card">
-                <h3 class="item-title" data-fa="کارشناسی مهندسی کامپیوتر" data-en="B.Sc. Computer Engineering">کارشناسی مهندسی کامپیوتر</h3>
-                <h4 class="item-subtitle" data-fa="دانشگاه صنعتی ارومیه (دولتی) - گرایش نرم‌افزار" data-en="Urmia University of Technology (Governmental) - Software Specialization">دانشگاه صنعتی ارومیه (دولتی) - گرایش نرم‌افزار</h4>
-                <span class="date" data-fa="۱۴۰۳ - اکنون" data-en="2024 - Present">۱۴۰۳ - اکنون</span>
-                <p data-fa="محل تحصیل: آذربایجان غربی، ارومیه" data-en="Location: Urmia, West Azerbaijan">محل تحصیل: آذربایجان غربی، ارومیه</p>
+                <h3 class="item-title" data-fa="کارشناسی مهندسی کامپیوتر" data-en="Bachelor of Science in Computer Engineering">کارشناسی مهندسی کامپیوتر</h3>
+                <h4 class="item-subtitle" data-fa="دانشگاه صنعتی ارومیه - گرایش نرم‌افزار" data-en="Urmia University of Technology - Software Specialization">دانشگاه صنعتی ارومیه - گرایش نرم‌افزار</h4>
+                <span class="date" data-fa="۱۴۰۳ - در حال تحصیل" data-en="2024 - Present">۱۴۰۳ - در حال تحصیل</span>
+                <p data-fa="محل تحصیل: ارومیه، آذربایجان غربی" data-en="Location: Urmia, West Azerbaijan">محل تحصیل: ارومیه، آذربایجان غربی</p>
             </div>
         </section>
 
@@ -909,25 +913,25 @@
             <h2 class="section-title" data-fa="افتخارات و گواهینامه‌ها" data-en="Honors & Certificates">افتخارات و گواهینامه‌ها</h2>
             <div class="honors-list">
                 <div class="card honor-item">
-                    <h3 class="item-title" data-fa="مقام اول مسابقات ملی مهارت نوجوانان" data-en="1st Place, National Youth Skills Competition">مقام اول مسابقات ملی مهارت نوجوانان</h3>
-                    <p class="date" data-fa="تیر ۱۴۰۲" data-en="July 2023">تیر ۱۴۰۲</p>
-                    <p><a href="https://skills.irantvto.ir/news/Yjscresultstep" target="_blank" rel="noopener noreferrer" data-fa="لینک مرتبط" data-en="Related Link">لینک مرتبط</a></p>
+                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)" data-en="1st Place, National Skills Competition (Mobile App Development - Youth Category)">مقام اول، مسابقات ملی مهارت (رشته توسعه نرم‌افزارهای موبایل - رده سنی نوجوانان)</h3>
+                    <p class="date" data-fa="تیرماه ۱۴۰۲" data-en="July 2023">تیرماه ۱۴۰۲</p>
+                    <p><a href="https://skills.irantvto.ir/news/Yjscresultstep" target="_blank" rel="noopener noreferrer" data-fa="مشاهده جزئیات" data-en="View Details">مشاهده جزئیات</a></p>
                 </div>
                 <div class="card honor-item">
-                    <h3 class="item-title" data-fa="مقام اول مسابقات ملی مهارت (مرحله شهرستانی و استانی)" data-en="1st Place, National Skills Competition (County & Provincial)">مقام اول مسابقات ملی مهارت (مرحله شهرستانی و استانی)</h3>
-                    <p class="date" data-fa="شهریور ۱۴۰۲" data-en="September 2023">شهریور ۱۴۰۲</p>
+                    <h3 class="item-title" data-fa="مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)" data-en="1st Place, National Skills Competition (County & Provincial Stages)">مقام اول، مسابقات ملی مهارت (مراحل شهرستانی و استانی)</h3>
+                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023">شهریورماه ۱۴۰۲</p>
                 </div>
                 <div class="card honor-item">
-                    <h3 class="item-title">ICDL</h3>
-                    <p data-fa="موسسه: سازمان فنی و حرفه‌ای کشور" data-en="Institution: Technical and Vocational Training Organization">موسسه: سازمان فنی و حرفه‌ای کشور</p>
-                    <p class="date" data-fa="شهریور ۱۴۰۲" data-en="September 2023">شهریور ۱۴۰۲</p>
+                    <h3 class="item-title" data-fa="گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)" data-en="International Computer Driving License (ICDL)">گواهینامه بین‌المللی کاربری کامپیوتر (ICDL)</h3>
+                    <p data-fa="صادره از: سازمان آموزش فنی و حرفه‌ای کشور" data-en="Issued by: Technical and Vocational Training Organization">صادره از: سازمان آموزش فنی و حرفه‌ای کشور</p>
+                    <p class="date" data-fa="شهریورماه ۱۴۰۲" data-en="September 2023">شهریورماه ۱۴۰۲</p>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="container">
-            <h2 class="section-title" data-fa="تماس با من" data-en="Contact Me">تماس با من</h2>
-            <p class="contact-prompt" data-fa="از طریق راه‌های زیر می‌توانید با من در ارتباط باشید:" data-en="You can reach me through the following channels:">از طریق راه‌های زیر می‌توانید با من در ارتباط باشید:</p>
+            <h2 class="section-title" data-fa="ارتباط با من" data-en="Contact Me">ارتباط با من</h2>
+            <p class="contact-prompt" data-fa="برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:" data-en="For collaboration, consultation, or any inquiries, feel free to reach out to me through the following channels:">برای همکاری، مشاوره و یا هرگونه سوال، می‌توانید از طریق راه‌های ارتباطی زیر با من در تماس باشید:</p>
             <div class="contact-links">
                 <a href="mailto:mrsYmehranni@gmail.com"><i class="fas fa-envelope"></i> mrsYmehranni@gmail.com</a>
                 <a href="tel:+989035872399"><i class="fas fa-phone"></i> ۰۹۸۹۰۳۵۸۷۲۳۹۹</a>
@@ -943,7 +947,7 @@
 
     <footer>
         <div class="container">
-            <p data-fa="© ۱۴۰۳ - تمام حقوق برای مهران رسول زاده محفوظ است." data-en="© 2024 - All rights reserved for Mehran Rasoulzadeh.">© ۱۴۰۳ - تمام حقوق برای مهران رسول زاده محفوظ است.</p>
+            <p data-fa="کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳" data-en="All rights reserved for Mehran Rasoulzadeh. © 2024">کلیه حقوق این وب‌سایت متعلق به مهران رسول زاده می‌باشد. © ۱۴۰۳</p>
         </div>
     </footer>
 
@@ -960,13 +964,11 @@
 
 
             translatableElements.forEach(el => {
-                // Preserve child elements like <i> within <a> or <button>
                 if (el.children.length > 0 && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'SPAN')) {
                     let textContent = el.dataset[lang];
-                    // Find text nodes to update
                     for (let i = 0; i < el.childNodes.length; i++) {
                         if (el.childNodes[i].nodeType === Node.TEXT_NODE) {
-                            el.childNodes[i].nodeValue = textContent; // Update only the first text node found for simplicity
+                            el.childNodes[i].nodeValue = textContent; 
                             break; 
                         }
                     }
@@ -994,7 +996,6 @@
 
         function changeLinkState() {
             let index = sections.length;
-            // Adjust offset to ensure the link activates when the section is more visible
             const offset = window.innerHeight * 0.3; 
 
             while(--index >= 0 && window.scrollY + offset < sections[index].offsetTop) {}
@@ -1002,7 +1003,7 @@
             navLinks.forEach((link) => link.classList.remove('active'));
             if (index >= 0 && navLinks[index]) { 
                  navLinks[index].classList.add('active');
-            } else if (window.scrollY < sections[0].offsetTop - offset && navLinks[0]) { // Activate first link if scrolled to top
+            } else if (window.scrollY < sections[0].offsetTop - offset && navLinks[0]) { 
                  navLinks[0].classList.add('active');
             }
         }
@@ -1013,7 +1014,7 @@
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.05 // Trigger when 5% of the element is visible for smoother appearance
+            threshold: 0.05 
         };
 
         const sectionObserver = new IntersectionObserver((entries, observer) => {
@@ -1021,7 +1022,6 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 } else {
-                     // To keep animation on once scrolled: comment out the line below
                      // entry.target.classList.remove('visible'); 
                 }
             });
@@ -1032,7 +1032,7 @@
         });
 
         // Initialize
-        setLanguage('fa'); // Default to Persian
+        setLanguage('en'); 
         changeLinkState(); 
     </script>
 </body>
